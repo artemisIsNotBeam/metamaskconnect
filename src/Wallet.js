@@ -14,14 +14,15 @@ class Wallet extends react.Component{
 	// I'm gonna have it where you click the button then its decalred as 
 	// web3 so its consistent and copy and paste code works better
 	connectWallet(){
-		console.log("hi");
+		this.props.connectionFunction();
 	}
 	// https://docs.metamask.io/guide/getting-started.html#basic-considerations
 	render(){
 		return <div>
 			<h3>hi I am nice website</h3>
 			<button onClick={this.connectWallet}>Connect Wallet</button>
-			<p>Wallet Adress</p>
+			<p>Wallet: </p>
+			<p>{this.props.web3}</p>
 		</div>
 	}
 }

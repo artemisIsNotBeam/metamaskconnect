@@ -6,12 +6,18 @@ class WalletPar extends react.Component{
 	constructor(props){
 		super(props);
 		this.state = { 
-			web3:null	
+			web3:"not connect yet"	
 		}
+        this.Walletconnection = this.Walletconnection.bind(this);
 	}
+
+    Walletconnection(){
+        this.setState({web3:"nice message"});
+    }
+
 	render(){
 		return <div>
-			<Wallet/>
+			<Wallet web3={this.state.web3} connectionFunction={this.Walletconnection}/>
 		</div>
 	}
 }
