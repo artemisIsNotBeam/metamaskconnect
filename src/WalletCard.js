@@ -2,6 +2,7 @@
 
 import React, {useState} from 'react'
 import {ethers} from 'ethers'
+import './WalletCard.css'
 
 const WalletCard = () => {
 
@@ -10,6 +11,7 @@ const WalletCard = () => {
 	const [userBalance, setUserBalance] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
 	let web3 = useState(null);
+	let shower = useState(null);
 
 	//NOTEE X Defi dosen't work with this.
 	const connectWalletHandler = () => {
@@ -22,7 +24,6 @@ const WalletCard = () => {
 				setConnButtonText('Wallet Connected');
 				getAccountBalance(result[0]);
 				web3 = result[0];
-				console.log("nice connection");
 			})
 			.catch(error => {
 				setErrorMessage(error.message);
@@ -56,6 +57,14 @@ const WalletCard = () => {
 		window.location.reload();
 	}
 
+	const converWallet = (Address) => {
+		let thing = Array.from(Address);
+		let Last = thing.slice(Math.max(thing.length - 5, 0));
+		console.log("0x....."+Last);
+
+		return "0x....."+Last.join('')
+	}
+
 
 	// listen for account changes
 	window.ethereum.on('accountsChanged', accountChangedHandler);
@@ -64,13 +73,12 @@ const WalletCard = () => {
 	
 	return (
 		<div className='walletCard'>
-		<h4> {"Connection to MetaMask using window.ethereum methods"} </h4>
 			<button onClick={connectWalletHandler}>{connButtonText}</button>
 			<div className='accountDisplay'>
-				<h3>Address: {defaultAccount}</h3>
+				<h3>Address: {defaultAccount ? converWallet(defaultAccount) : ""}</h3>
 			</div>
 			<div className='balanceDisplay'>
-				<h3>Balance: {userBalance}</h3>
+				<h3>Balance: {Math.floor(userBalance)}</h3>
 			</div>
 			{errorMessage}
 		</div>
