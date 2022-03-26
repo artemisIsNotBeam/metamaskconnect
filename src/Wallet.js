@@ -16,6 +16,7 @@ class Wallet extends react.Component{
 	connectWallet(){
 		this.props.connectionFunction();
 	}
+
 	// https://docs.metamask.io/guide/getting-started.html#basic-considerations
 	render(){
 		return <div>
