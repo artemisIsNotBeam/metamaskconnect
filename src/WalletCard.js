@@ -2,7 +2,6 @@
 
 import React, {useState} from 'react'
 import {ethers} from 'ethers'
-import './WalletCard.css'
 
 const WalletCard = () => {
 
@@ -10,20 +9,24 @@ const WalletCard = () => {
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
+	let web3 = useState(null);
 
+	//NOTEE X Defi dosen't work with this.
 	const connectWalletHandler = () => {
 		if (window.ethereum && window.ethereum.isMetaMask) {
 			console.log('MetaMask Here!');
-
+			// run the metmask request Accounts
 			window.ethereum.request({ method: 'eth_requestAccounts'})
 			.then(result => {
 				accountChangedHandler(result[0]);
 				setConnButtonText('Wallet Connected');
 				getAccountBalance(result[0]);
+				web3 = result[0];
+				console.log("nice connection");
 			})
 			.catch(error => {
 				setErrorMessage(error.message);
-			
+				console.log("eerrrrrorrrrrr");
 			});
 
 		} else {
