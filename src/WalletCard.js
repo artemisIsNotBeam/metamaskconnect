@@ -10,8 +10,6 @@ const WalletCard = () => {
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
-	let web3 = useState(null);
-	let shower = useState(null);
 
 	//NOTEE X Defi dosen't work with this.
 	const connectWalletHandler = () => {
@@ -23,15 +21,13 @@ const WalletCard = () => {
 				accountChangedHandler(result[0]);
 				setConnButtonText('Wallet Connected');
 				getAccountBalance(result[0]);
-				web3 = result[0];
 			})
 			.catch(error => {
+				alert("error conencting, check console");
 				setErrorMessage(error.message);
-				console.log("eerrrrrorrrrrr");
 			});
-
 		} else {
-			console.log('Need to install MetaMask');
+			alert("need to install Metamask");
 			setErrorMessage('Please install MetaMask browser extension to interact');
 		}
 	}
@@ -43,8 +39,10 @@ const WalletCard = () => {
 	}
 
 	const getAccountBalance = (account) => {
+
 		window.ethereum.request({method: 'eth_getBalance', params: [account, 'latest']})
 		.then(balance => {
+			//format otherwise returns 0xwjksjdl;aw
 			setUserBalance(ethers.utils.formatEther(balance));
 		})
 		.catch(error => {
@@ -58,10 +56,10 @@ const WalletCard = () => {
 	}
 
 	const converWallet = (Address) => {
+		//convert to array
 		let thing = Array.from(Address);
+		//get 5 last items
 		let Last = thing.slice(Math.max(thing.length - 5, 0));
-		console.log("0x....."+Last);
-
 		return "0x....."+Last.join('')
 	}
 
