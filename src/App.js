@@ -5,21 +5,23 @@ import { ConstructorFragment } from 'ethers/lib/utils';
 import { Wallet } from 'ethers';
 import React from 'react';
 
+import Web3 from 'web3';
 import ERC20TransferABI from './Contract/contractABI';
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.contractIntergration = this.contractIntergration.bind(this);
+    //need contract and and abi (line 8)
     this.setState({ 
       connect:false,
       contract:"0x6b175474e89094c44da98b954eedeac495271d0f",
-      web3: new Web3('http://localhost:8545')
     });
   }
 
   contractIntergration(){
-    
+    // https://ethereumdev.io/abi-for-erc20-contract-on-ethereum/
+    console.log("contract ingergration doing stuff");
   }
 
   render(){
