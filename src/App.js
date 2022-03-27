@@ -20,8 +20,20 @@ class App extends React.Component {
   }
 
   contractIntergration(){
-    // https://ethereumdev.io/abi-for-erc20-contract-on-ethereum/
-    console.log("contract ingergration doing stuff");
+    // https://ethereumdev.io/calling-a-smart-contract-from-javascript/
+    let web3 = new Web3("https://localhost:3000");
+    const daiToken = new web3.eth.Contract(ERC20TransferABI, this.state.contract);
+    // follow structure
+    // yourContract.methods.methodname
+    /*
+      daiToken.methods.balanceOf(senderAddress).call(function(err, res) {
+      if (err) {
+          console.log("An error occured", err);
+          return
+      }
+      console.log("The balance is: ",res)
+})
+    */
   }
 
   render(){
