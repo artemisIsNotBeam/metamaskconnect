@@ -12,6 +12,7 @@ In the project directory, you can run:
 
 ### `npm start`
 
-get npm install web3
-also npm insall --save ethers
+things to get
+npm install web3
+npm insall --save ethers
 
