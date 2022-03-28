@@ -16,13 +16,13 @@ class App extends React.Component {
       desiredNetwork:'3'
       // 3 is ropsten test network
     });
+
+    let web3 = new Web3("https://localhost:3000");
+
   }
 
   contractIntergration(){
     // https://ethereumdev.io/calling-a-smart-contract-from-javascript/
-
-    let web3 = new Web3("https://localhost:3000");
-    const daiToken = new web3.eth.Contract(ERC20TransferABI, this.state.contract);
 
     // follow structure
     // yourContract.methods.methodname
@@ -39,8 +39,8 @@ class App extends React.Component {
 
   render(){
     return <div className='App'>
-      <WalletCard /> 
-      <h4 chain={this.desiredNetwork}>I"m your nice dapp</h4>
+      <WalletCard chain={this.desiredNetwork}/> 
+      <h4>I"m your nice dapp</h4>
       <p>Nice dapp infomation</p>
       <button onClick={this.contractIntergration}>Thingy</button>
     </div>

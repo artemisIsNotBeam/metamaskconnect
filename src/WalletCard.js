@@ -5,6 +5,7 @@ import {ethers} from 'ethers'
 import './WalletCard.css'
 import Web3 from 'web3'
 
+
 const WalletCard = () => {
 
 	const [errorMessage, setErrorMessage] = useState(null);
@@ -22,6 +23,7 @@ const WalletCard = () => {
 				accountChangedHandler(result[0]);
 				setConnButtonText('Wallet Connected');
 				getAccountBalance(result[0]);
+				// my part
 			})
 			.catch(error => {
 				alert("error conencting, check console");
@@ -37,10 +39,6 @@ const WalletCard = () => {
   		// https://stackoverflow.com/questions/71071667/metamask-web3-is-there-any-way-to-make-sure-website-user-is-connected-to-a-part
  		// follow that structure
 	}
-
-	const switchChain = () =>{
-
-	}	
 
 	// update account, will cause component re-render
 	const accountChangedHandler = (newAccount) => {
@@ -86,7 +84,7 @@ const WalletCard = () => {
 				<h3>Address: {defaultAccount ? converWallet(defaultAccount) : ""}</h3>
 			</div>
 			<div className='balanceDisplay'>
-				<h3>Balance: {Math.floor(userBalance)}</h3>
+				<h3>Balance: {Math.round(userBalance*100)/1000}</h3>
 			</div>
 			{errorMessage}
 		</div>
