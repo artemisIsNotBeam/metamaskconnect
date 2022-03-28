@@ -18,10 +18,6 @@ class App extends React.Component {
     });
   }
 
-  // TODO: make sure user is connect to "right network"
-  // https://stackoverflow.com/questions/71071667/metamask-web3-is-there-any-way-to-make-sure-website-user-is-connected-to-a-part
-  // follow that structure
-
   contractIntergration(){
     // https://ethereumdev.io/calling-a-smart-contract-from-javascript/
 
@@ -44,7 +40,7 @@ class App extends React.Component {
   render(){
     return <div className='App'>
       <WalletCard /> 
-      <h4>I"m your nice dapp</h4>
+      <h4 chain={this.desiredNetwork}>I"m your nice dapp</h4>
       <p>Nice dapp infomation</p>
       <button onClick={this.contractIntergration}>Thingy</button>
     </div>

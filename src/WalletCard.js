@@ -3,6 +3,7 @@
 import React, {useState} from 'react'
 import {ethers} from 'ethers'
 import './WalletCard.css'
+import Web3 from 'web3'
 
 const WalletCard = () => {
 
@@ -30,7 +31,16 @@ const WalletCard = () => {
 			alert("need to install Metamask");
 			setErrorMessage('Please install MetaMask browser extension to interact');
 		}
+		
+		
+ 		 // TODO: make sure user is connect to "right network"
+  		// https://stackoverflow.com/questions/71071667/metamask-web3-is-there-any-way-to-make-sure-website-user-is-connected-to-a-part
+ 		// follow that structure
 	}
+
+	const switchChain = () =>{
+
+	}	
 
 	// update account, will cause component re-render
 	const accountChangedHandler = (newAccount) => {
