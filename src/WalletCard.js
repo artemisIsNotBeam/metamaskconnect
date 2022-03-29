@@ -6,12 +6,13 @@ import './WalletCard.css'
 import Web3 from 'web3'
 
 
-const WalletCard = () => {
+const WalletCard = (fakeprops) => {
 
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
+	let web3 = null;
 
 	//NOTEE X Defi dosen't work with this.
 	const connectWalletHandler = () => {
@@ -24,6 +25,8 @@ const WalletCard = () => {
 				setConnButtonText('Wallet Connected');
 				getAccountBalance(result[0]);
 				// my part
+				// this.props.setterWeb3(new Web3('http://localhost:3000/'));
+				console.log(fakeprops);
 			})
 			.catch(error => {
 				alert("error conencting, check console");

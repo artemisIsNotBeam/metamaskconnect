@@ -9,16 +9,15 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.contractIntergration = this.contractIntergration.bind(this);
+    this.setWeb3 = this.setWeb3.bind(this);
     //need contract and and abi (line 8)
     this.setState({ 
       connect:false,
       contract:"0x6b175474e89094c44da98b954eedeac495271d0f",
-      desiredNetwork:'3'
+      rightNetwork:'3',
+      web3:null
       // 3 is ropsten test network
     });
-
-    let web3 = new Web3("https://localhost:3000");
-
   }
 
   contractIntergration(){
@@ -35,11 +34,18 @@ class App extends React.Component {
         console.log("The balance is: ",res)
       })
     */
+
+  }
+
+  setWeb3(value){
+    this.setState( {web3: value});
+    console.log("i've been run");
   }
 
   render(){
     return <div className='App'>
-      <WalletCard chain={this.desiredNetwork}/> 
+      
+      <WalletCard chain={'3' /* 3 cause ropsten network is that*/} setterWeb3={this.setWeb3}/> 
       <h4>I"m your nice dapp</h4>
       <p>Nice dapp infomation</p>
       <button onClick={this.contractIntergration}>Thingy</button>
