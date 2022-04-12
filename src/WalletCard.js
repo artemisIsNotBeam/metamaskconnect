@@ -26,7 +26,12 @@ const WalletCard = (fakeprops) => {
 				getAccountBalance(result[0]);
 				// my part
 				// this.props.setterWeb3(new Web3('http://localhost:3000/'));
-				console.log(fakeprops);
+				// or use Web3.givenProvider
+
+				let setWeb3 = fakeprops["setterWeb3"];
+				setWeb3(new Web3(Web3.givenProvider));
+
+				
 			})
 			.catch(error => {
 				alert("error conencting, check console");

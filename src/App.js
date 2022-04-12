@@ -39,7 +39,7 @@ class App extends React.Component {
 
   setWeb3(value){
     this.setState( {web3: value});
-    console.log("i've been run");
+    console.log(this.state.web3);
   }
 
   render(){
