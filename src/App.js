@@ -8,22 +8,30 @@ import ERC20TransferABI from './Contract/contractABI';
 class App extends React.Component {
   constructor(props){
     super(props);
-    this.contractIntergration = this.contractIntergration.bind(this);
+    this.conBut1 = this.conBut1.bind(this);
     this.setWeb3 = this.setWeb3.bind(this);
     //need contract and and abi (line 8)
-    this.setState({ 
+    this.state = { 
       connect:false,
       contract:"0x6b175474e89094c44da98b954eedeac495271d0f",
       rightNetwork:'3',
-      web3:null
+      web3:"nothinghere"
       // 3 is ropsten test network
-    });
-  }
+    }
+  } 
 
-  contractIntergration(){
+  conBut1(){
+    console.log("hi");
     // https://ethereumdev.io/calling-a-smart-contract-from-javascript/
+    if (this.state.web3 === "nothinghere"){
+      alert("u gotta connect web3 dummy");
+      console.log("error");
+    }else{
 
-    let contract = new this.state.web3.eth.Contract(ERC20TransferABI,this.state.contract);
+    
+
+
+    // let contract = new this.state.web3.eth.Contract(ERC20TransferABI,this.state.contract);
 
 
     // follow structure
@@ -38,6 +46,7 @@ class App extends React.Component {
       })
     */
 
+    }
   }
 
   setWeb3(value){
@@ -49,9 +58,13 @@ class App extends React.Component {
     return <div className='App'>
       
       <WalletCard chain={'3' /* 3 cause ropsten network is that*/} setterWeb3={this.setWeb3}/> 
-      <h4>I"m your nice dapp</h4>
-      <p>Nice dapp infomation</p>
-      <button onClick={this.contractIntergration}>Thingy</button>
+      <div id="main">
+        <h3>Super Nice Dapp</h3>
+        <div id="1button">
+          <p>whatever this button does</p>
+          <button onClick={this.conBut1}>Do the button</button>
+        </div>
+      </div>
     </div>
   }
 }

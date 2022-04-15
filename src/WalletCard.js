@@ -12,14 +12,15 @@ const WalletCard = (fakeprops) => {
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
-	let web3 = null;
+
+	const {ethereum} =window;
 
 	//NOTEE X Defi dosen't work with this.
 	const connectWalletHandler = () => {
 		if (window.ethereum && window.ethereum.isMetaMask) {
 			console.log('MetaMask Here!');
 			// run the metmask request Accounts
-			window.ethereum.request({ method: 'eth_requestAccounts'})
+			ethereum.request({ method: 'eth_requestAccounts'})
 			.then(result => {
 				accountChangedHandler(result[0]);
 				setConnButtonText('Wallet Connected');
@@ -29,9 +30,34 @@ const WalletCard = (fakeprops) => {
 				// or use Web3.givenProvider
 
 				let setWeb3 = fakeprops["setterWeb3"];
-				setWeb3(new Web3(Web3.givenProvider));
+				let web3= new Web3(Web3.givenProvider);
+				setWeb3(web3);
 
-				
+				web3.eth.net.getId()
+				.then((networkId) => {
+					if (networkId !== fakeprops['chain']) {
+						// MetaMask network is wrong		
+						console.log(networkId);
+						ethereum.request({
+							method: 'wallet_switchEthereumChain',
+							params: [{ chainId: web3.utils.toHex(fakeprops['chain']) }],
+						})
+						.then(() =>{
+							console.log("switched chains")
+						}
+						)
+						.catch((e) => {
+							if (e.code === 4902) {
+							console.log('network is not available, add it')
+							} else {
+							console.log('could not set network')
+							}
+						})
+					}
+				})
+				.catch((err) => {
+					// unable to retrieve network id
+				});
 			})
 			.catch(error => {
 				alert("error conencting, check console");
@@ -92,7 +118,7 @@ const WalletCard = (fakeprops) => {
 				<h3>Address: {defaultAccount ? converWallet(defaultAccount) : ""}</h3>
 			</div>
 			<div className='balanceDisplay'>
-				<h3>Balance: {Math.round(userBalance*100)/1000}</h3>
+				<h3>Balance: {Math.round(userBalance*100)/100}</h3>
 			</div>
 			{errorMessage}
 		</div>
